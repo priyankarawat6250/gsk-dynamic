@@ -1,0 +1,2120 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+    font-family: 'Montserrat', sans-serif !important;
+    color: #828282;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif !important;
+    color: #090909;
+}
+p {
+    font-size: 16px;
+    line-height: 24px;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+a {
+    color: #29abff;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    text-decoration: none !important;
+}
+a:hover,
+a:focus {
+  text-decoration: none;
+  color: #1b90db;
+}
+img {
+    max-width: 100%;
+}
+.wrapper {
+    float: left;
+    width: 100%;
+}
+.py-40 {
+    padding: 40px 0;
+}
+.py-60 {
+    padding: 60px 0;
+}
+.py-80 {
+    padding: 70px 0;
+}
+.pt-80 {
+    padding-top: 70px;
+}
+.pt-140 {
+    padding-top: 120px;
+}
+.pb-80 {
+    padding-bottom: 70px;
+}
+.pb-140 {
+    padding-bottom: 120px;
+}
+.form-control:focus {
+    color: #090909;
+    border-color: #29abff;
+    box-shadow: 0 0 0 .25rem rgba(41,171,255,.25);
+}
+/***Common Button CSS Start***/
+.btnCommon,
+button.btnCommon {
+    position: relative;
+    background: #29abff;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 700 !important;
+    line-height: 48px;
+    text-transform: uppercase;
+    padding: 0 30px;
+    border: 0;
+    border-radius: 4px;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    margin: 3px 0 3px 3px;
+    text-align: center;
+    min-width: 170px;
+    z-index: 1;
+}
+.btnCommon::after,
+button.btnCommon::after {
+    background: #29abff;
+    position: absolute;
+    content: "";
+    left: -3px;
+    top: -3px;
+    bottom: -3px;
+    width: 80%;
+    border-radius: 4px;
+    opacity: 0.5;
+    transition: all 0.4s ease 0s;
+    z-index: -1;
+}
+.btnCommon.btnWhite {
+    background: #ffffff;
+    color: #090909;
+}
+.btnCommon.btnWhite::after {
+    background: #ffffff;
+}
+.btnCommon:hover,
+button.btnCommon:hover,
+button.btn-check:focus + .btn-primary,
+button.btn-primary:focus {
+    color: #fff;
+    background-color: #0b5ed7;
+    background: #1b90db;
+}
+.btnCommon:hover::after {
+    background: #1b90db;
+}
+.btnCommon.btnWhite:hover {
+    background: #ffffff;
+    color: #090909;
+    opacity: 0.9;
+}
+.btnCommon.btnWhite:hover::after {
+    background: #ffffff;
+}
+/***Common Button CSS End***/
+/***Header CSS Start***/
+.mainHeader {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    padding: 35px 0;
+    z-index: 9;
+}
+.hdrMenu {
+    text-align: right;
+}
+.hdrMenu > ul {
+    margin: 0;
+    padding: 0;
+}
+.hdrMenu > ul > li {
+    position: relative;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+}
+.hdrMenu > ul > li + li {
+    margin-left: 20px;
+}
+.hdrMenu > ul > li > a {
+    font-size: 15px;
+    color: #fff;
+    line-height: 48px;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: all 0.4s ease 0s;
+    padding: 0 8px;
+}
+.hdrMenu > ul > li > a:hover {
+    color: #29abff;
+}
+.hdrMenu > ul > li.menuBtn a {
+    padding: 0 20px;
+}
+.hdrMenu > ul > li.menuBtn a:hover {
+    color: #ffffff;
+}
+.hdrMenu > ul > li ul {
+    background: #fff;
+    position: absolute;
+    min-width: 240px;
+    display: none;
+    text-align: left;
+    padding: 0;
+    border-radius: 4px;
+    box-shadow: 0 8px 12px -2px rgb(0 0 0 / 10%);
+    z-index: 9;
+}
+.hdrMenu > ul > li:hover > ul {
+    display: block;
+}
+.hdrMenu > ul > li > ul li {
+    position: relative;
+}
+.hdrMenu > ul > li > ul li + li {
+    border-top: 1px solid #f4f4f4;
+}
+.hdrMenu > ul > li > ul li a {
+    font-size: 14px;
+    display: block;
+    text-transform: uppercase;
+    color: #090909;
+    padding: 0 16px;
+    line-height: 44px;
+    font-weight: 500;
+    transition: all 0.3s ease 0s;
+    border-radius: 4px;
+}
+.hdrMenu > ul > li > ul li:first-child a {
+    border-radius: 4px 4px 0 0;
+}
+.hdrMenu > ul > li > ul li:last-child a {
+    border-radius: 0 0 4px 4px;
+}
+.hdrMenu > ul > li > ul li a:hover {
+    background: #29abff;
+    color: #fff;
+}
+.hdrMenu > ul > li > ul ul {
+    top: 0;
+    left: 100%;
+}
+.hdrMenu > ul > li > ul > li:hover > ul {
+    display: block;
+}
+.hdrScl {
+    margin-left: 10px;
+}
+.hdrScl a {
+    font-size: 22px;
+    color: #fff;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+}
+.hdrScl a:hover {
+    color: #29abff;
+}
+.hdrScl a + a {
+    margin-left: 24px;
+}
+/***Header CSS End***/
+
+/***Main Slider CSS Start***/
+.mainSlider-outer {
+    position: relative;
+}
+.mainSlider {
+    position: relative;
+    z-index: 1;
+}
+.mainSlider .swiper::before {
+    background: #29abff;
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 230px;
+    height: 120px;
+    z-index: 2;
+}
+.mainSlider .swiper::after {
+    background: #1b90db;
+    position: absolute;
+    content: "";
+    left: 230px;
+    right: 0;
+    bottom: 0;
+    max-width: calc(340px - 230px);
+    height: 120px;
+    z-index: 2;
+}
+.mainSldrSlide {
+    position: relative;
+    min-height: 85vh;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    z-index: 1;
+}
+.mainSldrOverlay {
+    background: #000;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.4;
+    z-index: -1;
+}
+.mainThumbSlider {
+    position: absolute;
+    width: 500px;
+    right: 0;
+    bottom: 0;
+    padding: 40px;
+    z-index: 2;
+    display: none;
+}
+.sldrThumbSlide {
+    width: 90px;
+    height: 90px;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.4s ease 0s;
+    cursor: pointer;
+}
+.mainThumbSlider .swiper-slide-thumb-active .sldrThumbSlide {
+    transform: scale(1.15);
+}
+.sldrThumbSlide::before {
+    background: #090909;
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.3;
+    transition: all 0.4s ease 0s;
+}
+.mainThumbSlider .swiper-slide-thumb-active .sldrThumbSlide::before {
+    background: #1b90db;
+    opacity: 0.6;
+}
+.sldrThumbSlide img {
+    width: 86px;
+    height: 86px;
+    object-fit: cover;
+    object-position: center;
+}
+.crslCntrls .swiper-button-next,
+.crslCntrls .swiper-button-prev {
+    background: #bee6ff;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    z-index: 2;
+}
+.crslCntrls .swiper-button-prev::before,
+.crslCntrls .swiper-button-next::before {
+    display: none;
+}
+.crslCntrls .swiper-button-prev::after,
+.crslCntrls .swiper-button-next::after {
+    position: absolute;
+    content: "";
+    width: 42px;
+    height: 21px;
+    border-radius: 40px;
+    z-index: -1;
+}
+.crslCntrls .swiper-button-next::after {
+    background: url("../images/arrowRightBlack.png") no-repeat center center / contain;
+    left: -20px;
+}
+.crslCntrls .swiper-button-prev::after {
+    background: url("../images/arrowLeftBlack.png") no-repeat center center / contain;
+    right: -20px;
+}
+.crslCntrls.crslCntrlsWhite .swiper-button-next,
+.crslCntrls.crslCntrlsWhite .swiper-button-prev {
+    background: rgba(255,255,255,0.3);
+}
+.crslCntrls.crslCntrlsWhite .swiper-button-next::after {
+    background: url("../images/arrowRightWhite.png") no-repeat center center / contain;
+    left: -20px;
+}
+.crslCntrls.crslCntrlsWhite .swiper-button-prev::after {
+    background: url("../images/arrowLeftWhite.png") no-repeat center center / contain;
+    right: -20px;
+}
+
+.mainSlider.crslCntrls .swiper-button-next,
+.mainSlider.crslCntrls .swiper-button-prev {
+    top: 100%;
+    margin-top: -80px;
+}
+.mainSlider.crslCntrls .swiper-button-next,
+.mainSlider.crslCntrls .swiper-button-prev {
+    z-index: 9;
+}
+.mainSlider.crslCntrls .swiper-button-prev,
+.mainSlider.crslCntrls .swiper-rtl .swiper-button-next {
+    left: 30px;
+    right: auto;
+}
+.mainSlider.crslCntrls .swiper-button-next,
+.mainSlider.crslCntrls .swiper-rtl .swiper-button-prev {
+    right: inherit;
+    left: 140px;
+}
+.mainSlider .swiper-pagination {
+    position: absolute;
+    left: 270px;
+    bottom: 45px;
+    width: auto;
+    z-index: 99999;
+    color: #fff;
+    font-weight: 600;
+}
+.mainSldrBarDiv {
+    position: absolute;
+    left: 230px;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+}
+.mainSldrTextDiv {
+    margin-left: -230px;
+}
+.mainSldrText {
+    max-width: 650px;
+    margin-bottom: 50px;
+}
+.mainSldrText h1 {
+    font-size: 52px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 64px;
+    text-transform: uppercase;
+    margin: 0;
+    text-shadow: 0 0 3px rgba(0,0,0,0.15);
+}
+.mainSldrText p {
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 0 0 3px rgba(0,0,0,0.15);
+    margin: 10px 0 0 0;
+}
+.mainSldrText p i {
+    display: inline-block;
+    margin-right: 6px;
+}
+.mainSliderOptions {
+    /* background: #29abff; */
+    padding: 32px 40px;
+    max-width: 691px;
+    text-align: right;
+}
+.bookApointBtn {
+    display: inline-block;
+}
+/***Main Slider CSS End***/
+
+/***Advance Search Start***/
+.searchAdvanceBlk  {
+    background: #e9f6ff url("../images/propertiesBg.png") repeat-x center bottom / contain;
+    position: relative;
+}
+.indexAdvanchSrch {
+    background: #29abff;
+}
+.advncSearchForm .form-control, .advncSearchForm .form-select {
+    border: 0px;
+    height: 52px;
+    border: 1px solid #ddd;
+}
+.advncSearchForm .form-select select:invalid { 
+    line-height: 50px!important;
+    color: red;
+}
+.advncSearchForm label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #090909;
+}
+/***Advance Search End***/
+
+/***Main Heading CSS Start***/
+.mainHeading {
+	margin-bottom: 50px;
+}
+.mainHeading h2 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 50px;
+    margin-bottom: 10px;
+}
+.mainHeading h2 span {
+    color: #29abff;
+}
+.hdngBrdrs {
+    display: none;
+}
+.hdngBrdrs span {
+    background: #29abff;
+    display: inline-block;
+    vertical-align: middle;
+}
+span.hdngBrdr1 {
+    width: 7px;
+    height: 3px;
+}
+
+span.hdngBrdr2 {
+    width: 14px;
+    height: 3px;
+}
+
+span.hdngBrdr3 {
+    width: 70px;
+    height: 1px;
+}
+.mainHeading p {
+    color: #090909;
+    opacity: 0.7;
+    margin: 16px 0 0 0;
+}
+.headingCenter {
+    text-align: center;
+}
+.headingWhite h2,
+.headingWhite h5,
+.headingWhite p {
+    color: #fff;
+}
+.headingWhite .hdngBrdrs span {
+    background: #fff;
+}
+.mainHeading.headingSmall {
+    margin-bottom: 30px;
+}
+.mainHeading.headingSmall h2 {
+    font-size: 30px;
+    line-height: 44px;
+}
+/***Main Heading CSS End***/
+
+/***GSK Category & Amenities CSS Start***/
+.gskCatAmenBlock {
+    background: url("../images/aboutBg.jpg") no-repeat left bottom / contain;
+}
+/***GSK Category CSS Start***/
+.catCol {
+    width: 213px;
+    height: 213px;
+    margin: auto;
+    transition: all 0.4s ease 0s;
+}
+.catCol a {
+    background: #e9f6ff;
+    width: 213px;
+    height: 213px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 50px 0;
+    transition: all 0.4s ease 0s;
+}
+.catCol:hover a {
+    background: #29abff;
+}
+.catCol span {
+    display: inline-block;
+}
+.catCol span img {
+    height: 70px;
+}
+.catCol h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 24px 0 0 0;
+    transition: all 0.4s ease 0s;
+}
+.catCol:hover h4 {
+    color: #ffffff;
+}
+/***GSK Category CSS End***/
+
+/***GSK Amenities CSS Start***/
+.gskAmenBlock {
+    position: relative;
+}
+.abtKeyPatt {
+    position: absolute;
+    right: 0;
+    bottom: -40px;
+}
+.gskAmenVideo {
+    position: relative;
+    top: 0;
+    transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -ms-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-image: url(../images/videoBg.png);
+    mask-image: url(../images/videoBg.png);
+    -webkit-mask-position: center center;
+    mask-position: center center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    width: 492px;
+    height: 492px;
+}
+.gskAmenVideo > img {
+    min-height: 492px;
+}
+.videoIcon {
+    background: url("../images/playIconBg.png");
+    position: absolute;
+    width: 103px;
+    height: 111px;
+    line-height: 111px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.videoIcon a {
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+}
+.gskAmenVideo:hover a {
+    transform: scale(1.1);
+}
+.gskAmenContent p {
+    color: #090909;
+    opacity: 0.7;
+    line-height: 36px;
+    margin: 0 0 40px 0;
+}
+.infoList ul {
+    margin-top: -30px;
+}
+.infoList.infoListFull ul {
+    margin-top: 0;
+}
+.infoList ul li {
+    display: inline-block;
+    width: 49%;
+    font-size: 16px;
+    color: #090909;
+    line-height: 24px;
+    font-weight: 600;
+    margin-top: 30px;
+    position: relative;
+    padding-left: 44px;
+    min-height: 28px;
+    VERTICAL-ALIGN: TOP;
+}
+.infoList.infoListFull ul li {
+    display: block;
+    width: 100%;
+}
+.infoList ul li i {
+    display: inline-block;
+    margin-right: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+/***GSK Amenities CSS End***/
+/***GSK Category & Amenities CSS End***/
+
+/***City Slider CSS Start***/
+.citySldrRow {
+    position: relative;
+    overflow: hidden;
+    clear: both;
+    z-index: 1;
+}
+.citySldrRow::before {
+    background-image: url("../images/buildingPatt1.png");
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: contain;
+    z-index: -1;
+}
+.citySldrMainDiv {
+    position: absolute;
+    left: 0;
+    top: 80px;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+.citySldrRow:nth-child(2n) {
+    background: #e9f6ff;
+}
+.citySldrRow:nth-child(2n)::before {
+    background-image: url("../images/buildingPatt2.png");
+    background-position: bottom left;
+}
+.citySliderOuter {
+    width: 65%;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.citySldrRow:nth-child(2n) .citySliderOuter {
+    float: right;
+    width: 65%;
+}
+.citySliderOuter .swiper-slide {
+    overflow: hidden;
+    border-radius: 4px;
+}
+.citySlide {
+    min-height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    transition: all 0.4s ease 0s;
+}
+.citySlide:hover {
+    transform: scale(1.1);
+}
+/***City Slider CSS End***/
+
+/***GSK Why Choose CSS Start***/
+.homeWhyChooseBlock {
+    background: #e9f6ff;
+    position: relative;
+    z-index: 1;
+}
+.homeWhyChooseBlock::before {
+    background: url("../images/whyChooseBg.png");
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 396px;
+    z-index: -1;
+}
+.whyChooseInfoDiv {
+    background: #fff;
+    box-shadow: 0 0 8px 2px rgb(0 0 0 / 10%);
+    border-radius: 8px;
+}
+.whyChooseInfoCol {
+    padding: 56px 22px;
+    text-align: center;
+    border-right: 1px solid #e8e8e8;
+}
+.whyChooseInfoDiv .col-md-3:last-child .whyChooseInfoCol {
+    border-right: 0;
+}
+.whyChooseInfoCol span {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+}
+.whyChooseInfoCol span::before {
+    background: #e9f6ff;
+    position: absolute;
+    content: "";
+    width: 54px;
+    height: 54px;
+    border-radius: 54px;
+    left: -12px;
+    top: -8px;
+    z-index: -1;
+}
+.whyChooseInfoCol h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 30px 0 20px 0;
+}
+.whyChooseInfoCol p {
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0;
+}
+/***GSK Why Choose CSS Start***/
+
+/***GSK Property CSS Start***/
+.homePropertyBlock {
+    background: #29abff;
+    position: relative;
+    z-index: 1;
+}
+.homePropertyBlock::after {
+    background: url("../images/propertiesBg.png") repeat-x center bottom / contain;
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 424px;
+    z-index: -1;
+    display: none;
+}
+.ltstPrprtyRow {
+    position: relative;
+}
+.prprtyMainDiv {
+    position: absolute;
+    left: 0;
+    top: 80px;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+.prprtySldrOuter {
+    width: 65%;
+}
+.prprtyItem {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.4s ease 0s;
+    box-shadow: 0 0 3px 1px rgb(0 0 0 / 10%);
+    margin: 0;
+}
+.prprtyItem a {
+    display: block;
+}
+.prprtyBadge {
+    position: absolute;
+    background: #29abff;
+    width: 100px;
+    padding: 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    left: 20px;
+    top: 30px;
+    z-index: 1;
+}
+.prprtyBadge::before {
+    background: url("../images/badge.png");
+    position: absolute;
+    content: "";
+    width: 49px;
+    height: 38px;
+    left: 24px;
+    bottom: 30px;
+    z-index: 2;
+}
+.prprtyImg {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    min-height: 300px;
+    transition: all 0.4s ease 0s;
+}
+.prprtyItem:hover .prprtyImg {
+    transform: scale(1.1);
+}
+.prprtyOverlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.0) 65%, rgba(0,0,0) 120%);
+    transition: all 0.4s ease 0s;
+    padding: 15px;
+}
+.prprtyInfo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 18px;
+}
+.prprtyInfo h4 {
+    font-size: 22px;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.prprtyInfo p {
+    font-size: 14px;
+    color: #fff;
+    margin: 0;
+}
+.prprtyInfo p i {
+    display: inline-block;
+    margin-right: 5px;
+}
+/***GSK Property CSS End***/
+
+/***Reviews CSS Start***/
+.reviewsBlock {
+    position: relative;
+    z-index: 1;
+}
+.reviewsBlock::before {
+    background: url(../images/propertiesBg1.png) repeat-x center bottom / contain;
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 424px;
+    z-index: -1;
+}
+.reviewSliderOuter {
+    padding: 80px 50px 0 50px;
+}
+.reviewSlider .swiper {
+    padding-bottom: 120px;
+}
+.reviewSlide {
+    background: #e9f6ff;
+    padding: 70px 30px;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 50px;
+    transition: all 0.4s ease 0s;
+}
+.reviewSlide:hover {
+    background: #29abff;
+}
+.reviewSlider .swiper-slide-active .reviewSlide {
+    background: #29abff;
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+.reviewContent {
+    position: relative;
+    padding-top: 10px;
+}
+.reviewSlider .swiper-slide-active .reviewContent {
+    padding-top: 40px;
+}
+.reviewContent::before {
+    background: url("../images/quoteDark.png");
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 0;
+    width: 90px;
+    height: 65px;
+    margin-left: -45px;
+    transition: all 0.4s ease 0s;
+}
+.reviewSlider .swiper-slide-active .reviewContent::before {
+    background: url("../images/quoteLight.png");
+    top: 30px;
+}
+.reviewSlide:hover .reviewContent::before  {
+    background: url("../images/quoteLight.png");
+}
+.reviewContent p {
+    font-size: 18px;
+    line-height: 36px;
+    color: #090909;
+    font-weight: 500;
+    font-style: italic;
+    margin: 0;
+    transition: all 0.4s ease 0s;
+}
+.reviewSlide:hover .reviewContent p {
+    color: #ffffff;
+}
+.reviewSlider .swiper-slide-active .reviewContent p {
+    color: #ffffff;
+}
+.reviewTitle {
+    margin: 40px 0 30px 0;
+}
+.reviewSlider .swiper-slide-active .reviewTitle {
+    margin: 40px 0 0 0;
+}
+.reviewTitle h4 {
+    font-size: 20px;
+    color: #29abff;
+    font-weight: 600;
+    margin: 0;
+    transition: all 0.4s ease 0s;
+}
+.reviewSlider .swiper-slide-active .reviewTitle h4 {
+    color: #ffffff;
+}
+.reviewSlide:hover .reviewTitle h4 {
+    color: #ffffff;
+}
+.reviewAuthor {
+    position: absolute;
+    left: 50%;
+    margin-left: -57px;
+    bottom: 0;
+}
+.reviewSlider .swiper-slide-active .reviewAuthor {
+    top: 0;
+    bottom: inherit;
+}
+.reviewAuthor span {
+    width: 115px;
+    height: 115px;
+    display: inline-block;
+    border-radius: 115px;
+    overflow: hidden;
+    border: 4px solid #fff;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
+}
+.reviewAuthor span img {
+    width: 107px;
+    height: 107px;
+}
+.reviewSlider.crslCntrls .swiper-button-next,
+.reviewSlider.crslCntrls .swiper-button-prev {
+    top: 100%;
+    margin-top: -60px;
+}
+.reviewSlider .swiper-button-prev,
+.reviewSlider .swiper-rtl .swiper-button-next {
+    left: 44%;
+    right: auto;
+}
+.reviewSlider .swiper-button-next,
+.reviewSlider .swiper-rtl .swiper-button-prev {
+    right: 44%;
+    left: auto;
+}
+/***Reviews CSS End***/
+
+/***Reviews Rating CSS Start***/
+.reviewRatingRow {
+    display: flex;
+}
+.rvwRatingCol {
+    background: #fff;
+    position: relative;
+    width: 100%;
+    padding: 8px 30px 8px 16px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 4px 2px rgb(0 0 0 / 10%);
+    cursor: pointer;
+}
+.rvwRatingCol + .rvwRatingCol {
+    margin-left: 24px;
+}
+.rvwRatingIcon {
+    margin-right: 12px;
+}
+.rvwRatingTtl {
+    color: #090909;
+    font-weight: 600;
+}
+.rvwRatingScore {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+}
+.rvwRatingScore span {
+    display: inline-block;
+    font-size: 16px;
+    margin-right: 12px;
+    color: #090909;
+}
+.rvwRatingStars svg {
+    width: 22px;
+    height: 22px;
+}
+.rvwRatingStars i {
+    display: inline-block;
+}
+.rvwRatingStars i + i {
+    margin-left: 6px;
+}
+.rvwRatingNote p {
+    margin: 0;
+    font-size: 14px;
+}
+/***Reviews Rating CSS End***/
+
+/***Call To Action CSS Start***/
+.homeCallActBlock {
+    background: #e9f6ff url("../images/propertiesBg.png") repeat-x center bottom / contain;
+    position: relative;
+}
+/***Call To Action CSS End***/
+
+/***Contact CSS Start***/
+.homeCntctBlock {
+    position: relative;
+    z-index: 1;
+}
+.homeCntctBlock::before {
+    background: #29abff;
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 400px;
+    z-index: -1;
+}
+.homeCntctBlock::after {
+    background: url("../images/mapBg.png");
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    height: 400px;
+    width: 744px;
+    z-index: -1;
+}
+.homeCntctForm {
+    background: #fff;
+    position: relative;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px 2px rgb(0 0 0 / 10%);
+}
+.homeCntctForm form {
+    padding-right: 60px;
+}
+.cntctBrdrTtl {
+    position: absolute;
+    font-size: 78px;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    font-weight: 800;
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: #29abff;
+    color: #fff;
+    right: -232px;
+    bottom: 246px;
+    letter-spacing: 1px;
+}
+.homeCntctForm .form-group {
+    background: #fff;
+    position: relative;
+    padding: 4px 38px 4px 12px;
+    border: 1px solid #eeeeee;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+.homeCntctForm .form-group.selectedService {
+    background: #f4f4f4;
+    border: 1px solid #29abff;
+}
+.homeCntctForm .form-group.formGroupTextarea {
+    padding: 6px 12px 6px 12px;
+}
+.homeCntctForm .form-group label {
+    font-size: 14px;
+    color: #575757;
+    font-weight: 500;
+    line-height: 16px;
+}
+.homeCntctForm .form-group i {
+    position: absolute;
+    right: 14px;
+    top: 18px;
+    display: inline-block;
+}
+.homeCntctForm .form-control {
+    font-size: 15px;
+    color: #090909;
+    font-weight: 700;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    height: 30px;
+}
+.homeCntctForm .selectedService .form-control {
+    background: transparent;
+    /* color: #fff; */
+}
+.homeCntctForm textarea.form-control {
+    height: 80px;
+}
+.homeCntctForm .form-control::placeholder {
+    color: #090909;
+}
+.homeCntctForm .form-control:focus {
+    box-shadow: none;
+}
+.homeCntctMainDiv {
+    padding-left: 50px;
+}
+.homeCntctInfoRow {
+    padding: 64px 0;
+}
+.homeCntctInfoCol.homeCntctCall {
+    padding-left: 40px;
+}
+.homeCntctInfoCol span {
+    display: inline-block;
+}
+.homeCntctInfoCol h4 {
+    font-size: 22px;
+    color: #fff;
+    font-weight: 600;
+    margin: 30px 0 16px 0;
+}
+.homeCntctInfoCol p,
+.homeCntctInfoCol p a {
+    color: #fff;
+    margin: 0;
+}
+.homeCntctMap {
+    margin-top: 80px;
+}
+.homeCntctMap iframe {
+    width: 100%;
+    height: 350px;
+    border-radius: 4px;
+}
+/***Contact CSS Start***/
+
+/***Feedback Pop Up Start***/
+.fedBackPopDialog .modal-content {
+    border: 0;
+}
+.fedBackPopDialog .modal-header {
+    background: #29abff;
+    color: #fff;
+}
+.fedBackPopDialog .modal-header .mdlHeading {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 40px;
+    margin-bottom: 0;
+}
+.fedBackPopDialog .modal-header button {
+    margin-top: -20px;
+    padding: 0;
+    margin-right: 0;
+}
+.fedBackPopDialog .modal-body {
+    padding: 1rem;
+}
+.feedBackPopup .homeCntctForm {
+    box-shadow: inherit;
+    padding-top: 0px;
+    padding-left: 1px;
+}
+
+/***Feedback Pop Up End***/
+
+/***Newsletter CSS Start***/
+.nwsltrBlock {
+    position: relative;
+    margin-top: 80px;
+    z-index: 1;
+}
+.nwsltrBlock::before {
+    background: #e9f6ff;
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    z-index: -1;
+}
+.nwsltrKeyPatt {
+    position: absolute;
+    left: 0;
+    top: -60px;
+    z-index: -1;
+}
+.nwsltrManPatt {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.nwsltrCol {
+    background: #e9f6ff;
+    padding: 60px 0 50px 40px;
+    border-radius: 6px;
+    width: calc(100% - 180px);
+    margin-left: 180px;
+    position: relative;
+    overflow: hidden;
+}
+.nwsltrCol::before {
+    background: url("../images/newsletterPatt.png");
+    position: absolute;
+    content: "";
+    width: 219px;
+    height: 141px;
+    left: -70px;
+    bottom: 0;
+}
+.nwsltrHeading h3 {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+.nwsltrHeading p {
+    color: #090909;
+    margin: 0;
+}
+.nwsltrForm {
+    padding-left: 90px;
+}
+.nwsltrForm .form-group {
+    position: relative;
+    padding-right: 205px;
+}
+.nwsltrForm .form-group .form-control {
+    border: 0;
+    height: 54px;
+    padding: 12px 16px;
+    color: #090909;
+}
+.nwsltrForm .form-group .btnCommon {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.nwsltrForm .form-group p {
+    font-size: 14px;
+    line-height: 16px;
+    color: #090909;
+    margin: 10px 0 0 0;
+    font-weight: 500;
+}
+.nwsltrForm .form-group p i {
+    display: inline-block;
+    margin-right: 5px;
+}
+/***Newsletter CSS End***/
+
+/***Footer CSS Start***/
+.ftrBlock {
+    background: url("../images/ftrBg.png") repeat-x center bottom / contain;
+}
+.ftrInfo {
+    text-align: center;
+}
+.ftrMail a {
+    font-size: 22px;
+    font-weight: 600;
+    display: inline-block;
+}
+.ftrLinks {
+    margin: 20px 0;
+}
+.ftrLinks a {
+    font-size: 16px;
+    color: #090909;
+    opacity: .7;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+}
+.ftrLinks a:hover {
+    color: #29abff;
+}
+.ftrLinks span {
+    display: inline-block;
+    margin: 0 20px;
+}
+.ftrScl a {
+    font-size: 24px;
+    color: #090909;
+    margin: 0 10px;
+    transition: all 0.4s ease 0s;
+}
+.ftrScl a:hover {
+    color: #29abff;
+}
+.ftrCopy {
+    text-align: center;
+    margin-top: 30px;
+}
+.ftrCopy p {
+    font-size: 20px;
+    color: #090909;
+    font-weight: 500;
+    margin: 0;
+}
+.ftrCopy p span {
+    display: inline-block;
+    font-weight: 700;
+}
+.ftrCopy p span font {
+    color: #29abff;
+}
+/***Footer CSS End***/
+
+/***Page Header CSS Start***/
+.pageHdrBlock {
+    position: relative;
+    background-position: center top;
+    background-size: cover;
+    padding-top: 240px;
+    z-index: 1;
+}
+.pageHdrOverlay {
+    background: #000000;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.55;
+    z-index: -1;
+}
+.pageHdrText {
+    text-align: center;
+    width: 70%;
+    margin: auto;
+}
+.pageHdrBlock p {
+    font-size: 20px;
+    color: #29abff;
+    margin: 0 0 30px 0;
+    text-shadow: 0 0 3px rgb(255 255 255 / 15%);
+}
+.pageHdrBlock h3 {
+    font-size: 46px;
+    color: #fff;
+    line-height: 54px;
+    text-shadow: 0 0 black;
+    font-weight: 700;
+    margin: 0;
+}
+.callNowBtn {
+    margin: 50px 0 40px 0;
+}
+/***Page Header CSS End***/
+
+/***Page Breadcrumbs CSS Start***/
+.pagebrdcrmbs .breadcrumb {
+    margin-bottom: 0;
+}
+.pagebrdcrmbs .breadcrumb-item a {
+    color: #29abff;
+}
+.pagebrdcrmbs .breadcrumb-item.active {
+    color: #fff;
+}
+.pagebrdcrmbs .breadcrumb-item + .breadcrumb-item::before {
+    color: #fff;
+}
+/***Page Breadcrumbs CSS End***/
+
+/***About Info CSS End***/
+.aboutInfoImg {
+    position: relative;
+    min-height: 420px;
+    border-radius: 5px;
+    background-size: cover;
+}
+.aboutInfoDes {
+    background: #e9f6ff;
+    padding: 40px;
+    min-height: 300px;
+    border-radius: 5px;
+    margin: 24px 0 0 0;
+    text-align: center;
+}
+.aboutInfoBlock .col-md-4:nth-child(2) .aboutInfoDes {
+    margin: 0 0 24px 0;
+}
+.aboutInfoDes h4 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+}
+
+.aboutInfoDes p {
+    font-size: 16px;
+    color: #090909;
+    margin: 0;
+}
+/***About Info CSS End***/
+
+/***About Why Choose CSS End***/
+.homeWhyChooseBlock.aboutWhyChooseBlock {
+    background: #ffffff;
+}
+.homeWhyChooseBlock.aboutWhyChooseBlock::after {
+    display: none;
+}
+/***About Why Choose CSS End***/
+
+
+/***Property Detail CSS Start***/
+/***Property Main Video CSS Start***/
+.prprtyMainVdoBlock {
+    position: relative;
+    min-height: 80vh;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    z-index: 1;
+}
+.prprtyMainVdoTextDiv {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+.prprtyMainVdoText {
+    text-align: center;
+}
+.prprtyMainVdoText h1 {
+    font-size: 52px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 64px;
+    text-transform: uppercase;
+    margin: 0;
+    text-shadow: 0 0 3px rgba(0,0,0,0.15);
+}
+.prprtyMainVdoText p {
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 0 0 3px rgba(0,0,0,0.15);
+    margin: 10px 0 0 0;
+}
+.resAppBtn {
+    margin-top: 20px;
+}
+/***Property Main Video CSS End***/
+
+/***Property Share CSS Start***/
+.prprtyShare {
+    display: inline-block;
+    margin-right: 20px;
+}
+.prprtyShare a {
+    display: inline-block;
+    font-size: 20px;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 4px;
+    transition: all 0.4s ease 0s;
+}
+.prprtyShare a + a {
+    margin-left: 20px;
+}
+.prprtyShare a:hover {
+    background: #ffffff;
+    color: #090909;
+}
+/***Property Share CSS End***/
+
+/***Property Rates CSS Start***/
+.prprtyRatesBock {
+    background: #e9f6ff;
+    position: relative;
+}
+.prprtyRateCol {
+    background: #fff;
+    position: relative;
+    padding: 24px 20px 20px 20px;
+    border-radius: 5px;
+    text-align: center;
+    border: 2px solid transparent;
+    box-shadow: 0 0 8px 4px rgba(0,0,0,.05);
+    transition: all 0.4s ease 0s;
+}
+.prprtyRateCol.prprtyBuildCol {
+    background: #29abff;
+}
+.prprtyRateCol:hover {
+    border-color: #29abff;
+    transform: translateY(-8px);
+    box-shadow: 0 50px 30px -40px rgb(0 0 0 / 10%);
+}
+.prprtyRateCol.prprtyBuildCol:hover {
+    transform: translateY(0);
+    box-shadow: 0 0 8px 4px rgba(0,0,0,.05);
+}
+.prprtyRateIcon {
+    position: relative;
+    margin-bottom: 20px;
+}
+.prprtyRateIcon span {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+}
+.prprtyRateIcon span::before {
+    background: #e9f6ff;
+    position: absolute;
+    content: "";
+    width: 54px;
+    height: 54px;
+    border-radius: 54px;
+    left: -12px;
+    top: -8px;
+    z-index: -1;
+}
+.prprtyRateIcon img {
+    width: 60px;
+}
+.prprtyRateTtl h4 {
+    font-size: 30px;
+    font-weight: 600;
+    color: #29abff;
+    margin: 16px 0;
+    transition: all 0.4s ease 0s;
+}
+.prprtyRateCol.prprtyBuildCol .prprtyRateTtl h4 {
+    color: #ffffff;
+}
+.prprtyRateTtl p {
+    font-size: 16px;
+    margin: 0;
+    color: #090909;
+}
+/***Property Rates CSS End***/
+
+/***Property Details CSS Start***/
+.prprtyDtlBock {
+    background: #e9f6ff;
+    position: relative;
+    z-index: 1;
+}
+.prprtyDtlBock::before {
+    background: #ffffff;
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    width: 80%;
+    bottom: 0;
+    z-index: -1;
+    border-radius: 0 40px 0 0;
+}
+.prprtyDtlImg {
+    height: 550px;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.15);
+}
+/***Property Details CSS End***/
+
+/***Property Right Sidebar CSS Start***/
+.colSticky {
+    position: sticky;
+}
+.prprtyCallCol {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+}
+.prprtyCallInfo {
+    background: #29abff;
+    position: relative;
+    padding: 18px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #29abff;
+}
+.prprtyCallIcon {
+    position: relative;
+    animation: blink 2s infinite;
+    box-shadow: 0 0 0 0 #ffffff;
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding: 16px;
+    min-width: 60px;
+}
+@keyframes blink {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 12px rgba(255, 255, 255, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+.prprtyCallIcon img {
+    width: 30px;
+}
+.prprtyCallDes {
+    margin-left: 20px;
+    white-space: nowrap;
+}
+.prprtyCallDes h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: #fff;
+}
+.prprtyCallDes p {
+    font-size: 15px;
+    color: #ffffff;
+    line-height: 26px;
+    margin: 0;
+}
+.prprtyCallDes p a {
+    font-size: 18px;
+    color: #ffffff;
+    text-decoration: underline;
+}
+/***Property Right Sidebar CSS End***/
+
+/***Property Video CSS Start***/
+.prprtyVdoBock {
+    background: #29abff;
+}
+.prprtyVdo iframe {
+    width: 100%;
+    height: 500px;
+}
+/***Property Video CSS Start***/
+
+/***Virtual Tour CSS Start***/
+.virtualTourBlock {
+    position: relative;
+}
+.virtualTourBlock::before {
+    background: url("../images/propertiesBg1.png") repeat-x center center / cover;
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 424px;
+}
+.virtualTourCol {
+    background: #e9f6ff;
+    position: relative;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid #29abff;
+}
+.virtualTourFrame iframe {
+    width: 100%;
+    height: 244px;
+}
+.virtualTourTtl {
+    margin-top: 15px;
+}
+.virtualTourTtl h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}
+/***Virtual Tour CSS End***/
+
+/***Property Reviews CSS Start***/
+.prprtyRvwsBlock {
+    background: #29abff;
+}
+.prprtyRvwAuthor {
+    text-align: center;
+}
+.prprtyRvwsContent {
+    position: relative;
+    margin-top: 20px;
+    padding-left: 15px;
+}
+.prprtyRvwsContent::before {
+    background: url("../images/quoteLight.png");
+    position: absolute;
+    content: "";
+    left: 0;
+    top: -10px;
+    width: 90px;
+    height: 65px;
+}
+.prprtyRvwsContent p {
+    font-size: 18px;
+    color: #fff;
+    line-height: 30px;
+    margin: 0;
+}
+.prprtyRvwAuthor span {
+    display: inline-block;
+    width: 108px;
+    height: 108px;
+    border-radius: 108px;
+    overflow: hidden;
+    box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    border: 4px solid #fff;
+}
+.prprtyRvwAuthor span img {
+    width: 100px;
+    height: 100px;
+    border-radius: 108px;
+}
+.prprtyRvwTitle {
+    margin-top: 14px;
+}
+.prprtyRvwTitle h4 {
+    font-size: 22px;
+    color: #fff;
+    font-weight: 600;
+    white-space: nowrap;
+    margin: 0;
+}
+/***Property Reviews CSS End***/
+
+/***Addition Property CSS Start***/
+.adtnPrprtySldrRow {
+    position: relative;
+    overflow: hidden;
+    clear: both;
+    z-index: 1;
+}
+.adtnPrprtySldrRow::before {
+    background-image: url("../images/buildingPatt1.png");
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: contain;
+    z-index: -1;
+}
+.adtnPrprtySldrMainDiv {
+    position: absolute;
+    left: 0;
+    top: 80px;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+.adtnPrprtySliderOuter {
+    border-radius: 4px;
+    overflow: hidden;
+}
+.adtnPrprtyCol {
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: all 0.4s ease 0s;
+}
+.adtnPrprtyCol * {
+    transition: all 0.4s ease 0s;
+}
+.adtnPrprtyImg {
+    border-radius: 5px;
+    overflow: hidden;
+    min-height: 410px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.adtnPrprtyCol:hover .adtnPrprtyImg {
+    transform: scale(1.1);
+}
+.adtnPrprtyDesOuter {
+    position: absolute;
+    background: #fff;
+    right: 20px;
+    bottom: 20px;
+    padding: 20px;
+    border-radius: 5px;
+}
+.adtnPrprtyCol:hover .adtnPrprtyDesOuter {
+    background: #29abff;
+}
+.adtnPrprtyDes {
+    display: flex;
+}
+.adtnPrprtyPrice {
+    padding-right: 20px;
+    margin-right: 20px;
+    border-right: 1px solid #e5e5e5;
+}
+.adtnPrprtyPrice h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+}
+.adtnPrprtyPrice h4 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #29abff;
+    margin: 10px 0 0 0;
+}
+.adtnPrprtyInfo li {
+    font-size: 15px;
+    color: #828282;
+}
+.adtnPrprtyInfo li + li {
+    margin-top: 18px;
+}
+.adtnPrprtyInfo li i {
+    display: inline-block;
+    margin-right: 10px;
+    width: 25px;
+}
+.adtnPrprtyInfo li i img:first-child {
+    display: inline-block;
+}
+.adtnPrprtyInfo li i img:last-child {
+    display: none;
+}
+.adtnPrprtyScrty {
+    margin-top: 16px;
+}
+.adtnPrprtyScrty p {
+    font-size: 16px;
+    color: #090909;
+    margin: 0;
+    font-weight: 600;
+}
+.adtnPrprtyCol:hover .adtnPrprtyPrice h3,
+.adtnPrprtyCol:hover .adtnPrprtyPrice h4,
+.adtnPrprtyCol:hover .adtnPrprtyInfo li,
+.adtnPrprtyCol:hover .adtnPrprtyScrty p {
+    color: #fff;
+}
+.adtnPrprtyCol:hover .adtnPrprtyPrice {
+    border-color: rgba(255,255,255,0.5);
+}
+.adtnPrprtyCol:hover .adtnPrprtyInfo li i img:first-child {
+    display: none;
+}
+.adtnPrprtyCol:hover .adtnPrprtyInfo li i img:last-child {
+    display: inline-block;
+}
+/***Additional Property CSS Start***/
+
+/***Book Appointment Form CSS Start***/
+.bookApointBlock {
+    background: #29abff;
+    position: relative;
+    z-index: 1;
+}
+.bookApointBlock::before {
+    background: url("../images/bookAppointment.png") no-repeat left bottom / contain;
+    position: absolute;
+    content: "";
+    width: 300px;
+    height: 400px;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+}
+.bookApointMap {
+    padding: 10% 0;
+}
+.bookApointMap iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+.bookApointBlock .cntctBrdrTtl {
+    font-size: 74px;
+    right: -257px;
+    bottom: 285px;
+}
+.bookApointMedia {
+    position: relative;
+    max-width: 701px;
+    bottom: -202px;
+}
+/***Book Appointment CSS End***/
+/***Property Detail CSS End***/
+
+/***Property Category Page Start***/
+.propertyCatBlock {
+    position: relative;
+}
+.propertyCatBlock::before {
+    background: #29abff;
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 396px;
+    z-index: -1;
+}
+.propertyTabs {
+    border: 0;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+.propertyTabs li {
+    display: inline-block;
+    margin: 0 15px;
+}
+.propertyTabs li button.nav-link {
+    background: transparent;
+    display: inline-block;
+    font-size: 16px;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 0 36px;
+    line-height: 48px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s ease 0s;
+}
+.propertyTabs li button.nav-link:hover {
+    background: #fff;
+    color: #090909;
+}
+.propertyCatItems .prprtyImg {
+    min-height: 350px;
+}
+/***Property Category Page End***/
+
+/***Testimonials Page Start***/
+.testiHeadingBlock {
+    background: #e9f6ff url(../images/propertiesBg.png) repeat-x center bottom / contain;
+    position: relative;
+}
+.testimonialRow {
+    position: relative;
+}
+.testimonialRow:nth-child(2n+1) {
+    background: #f9f9f9;
+}
+.testiMainImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.testimonialRow:nth-child(2n) .testiMainImg {
+    right: 0;
+    left: inherit;
+}
+.testimonialRow .col-md-6:first-child {
+    order: 2;
+}
+.testimonialRow:nth-child(2n) .col-md-6:first-child {
+    order: inherit;
+}
+.testiMainDiv {
+    padding-left: 50px;
+}
+.testimonialRow:nth-child(2n) .testiMainDiv {
+    padding-left: 0;
+    padding-right: 50px;
+}
+.testiMainDiv .mainHeading {
+    margin-bottom: 30px;
+}
+.testiContent {
+    position: relative;
+    padding-top: 10px;
+}
+.testiContent::before {
+    background: url("../images/quoteDark.png");
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    width: 90px;
+    height: 65px;
+    opacity: 0.5;
+}
+.testiContent p {
+    font-size: 18px;
+    line-height: 36px;
+    color: #090909;
+    font-weight: 500;
+    font-style: italic;
+    margin: 0;
+}
+.testiInfo {
+    margin-top: 30px;
+}
+.testiAuthor {
+    margin-right: 20px;
+}
+.testiAuthor span {
+    width: 115px;
+    height: 115px;
+    display: inline-block;
+    border-radius: 115px;
+    overflow: hidden;
+    border: 4px solid #fff;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
+}
+.testiAuthor span img {
+    width: 107px;
+    height: 107px;
+}
+.testiTitle h4 {
+    font-size: 20px;
+    color: #29abff;
+    font-weight: 600;
+    margin: 0;
+    text-transform: uppercase;
+}
+.testiSliderOuter .crslCntrls .swiper-button-next,
+.testiSliderOuter .crslCntrls .swiper-button-prev {
+    top: 100%;
+    margin-top: -60px;
+}
+.testiSliderOuter .swiper-button-prev,
+.testiSliderOuter .swiper-rtl .swiper-button-next {
+    left: inherit;
+    right: 100px;
+}
+.testiSliderOuter .swiper-button-next,
+.testiSliderOuter .swiper-rtl .swiper-button-prev {
+    right: 0;
+    left: auto;
+}
+/***Testimonials Page End***/
+
