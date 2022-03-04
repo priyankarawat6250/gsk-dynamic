@@ -14,15 +14,7 @@ class Dashboard extends React.Component{
     render(){
         return (
             <>
-             
-            <Header />            
-            <Sidebar />
-             
-             
-                 
-                       
-
-            <Footer />
+     Dashboard
             </>
         );
     }

@@ -8,18 +8,15 @@ class Header extends React.Component{
         return (
             <>
             <Links />    
+
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                  
-                <ul class="navbar-nav">
-                     
-
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="javascript:void(0)" class="nav-link">Dashboard</a>
-                    </li>
+                <ul class="navbar-nav">                    
                     
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="welcome/logout" class="nav-link">Logout</a>
+                        <Link to="/admin/category"><a href="#!" class="nav-link">Logout</a></Link>
                     </li>
+
                 </ul>  
             </nav>
                  

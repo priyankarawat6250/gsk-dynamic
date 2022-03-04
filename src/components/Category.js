@@ -10,7 +10,7 @@ class Category extends React.Component{
     render(){
         return (
         <>
-        <Header />
+         
     <section>
       <article className="pageHdrBlock wrapper py-80" style={{backgroundImage: `url("images/subpageBg.jpg")`}}>
         <div className="pageHdrOverlay"></div>
@@ -321,7 +321,7 @@ class Category extends React.Component{
       </article>
     </section>
 
-    <Footer />
+     
     </>
   )
 } };

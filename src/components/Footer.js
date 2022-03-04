@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-function Footer() {
+
+class Footer extends React.Component{
+ 
+
+render(){
   return (
     <footer className="ftrBlock wrapper py-80">
       <div className="container">
@@ -8,19 +12,22 @@ function Footer() {
           <div className="col">
             <div className="ftrInfo">
               <div className="ftrScl">
-                <Link to="https://www.facebook.com/gskproperties" target="_blank">
+
+                <a href={`https://${this.props.fblink}`}  target="_blank">
                   <i className="fa fa-facebook" aria-hidden="true"></i>
-                </Link>
+                </a>
+
               </div>
             </div>
             <div className="ftrCopy">
-              <p>© <span>GSK</span> Properties 2022</p>
+              <p>© <span>GSK</span> Properties {new Date().getFullYear()}</p>
             </div>
           </div>
         </div>
       </div>
     </footer>
   );
+}
 }
 
 export default Footer;

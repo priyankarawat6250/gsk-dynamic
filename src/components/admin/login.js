@@ -14,7 +14,7 @@ class Login extends React.Component{
     state={
          
         formdata: {   
-          email: "",
+          username: "",
           password: "",
         }
     }
@@ -24,8 +24,8 @@ class Login extends React.Component{
         
         let error = 0;
         let arry = "";
-        if (this.state.formdata.email === "") {
-          toast("Email can not be empty");
+        if (this.state.formdata.username === "") {
+          toast("Username can not be empty");
           error++;
         }
         
@@ -57,14 +57,14 @@ class Login extends React.Component{
                   
                     if(data.status == true){
                         toast("Successfully Login!!");
-                        // const user_id = jwt.sign({ expiresInMinutes: 60,user_id:data.data.id }, 'pokemon')
+                        // const id = jwt.sign({ expiresInMinutes: 60,id:data.data.id }, 'pokemon')
                         // const user_flag = jwt.sign({ expiresInMinutes: 60,user_flag:data.data.flag }, 'pokemon')
                         // const user_name = jwt.sign({ expiresInMinutes: 60,user_name:data.data.name }, 'pokemon')
                         // const user_unicode = jwt.sign({ expiresInMinutes: 60,user_unicode:data.data.student_eng_id }, 'pokemon')
                         // const mainID = jwt.sign({ expiresInMinutes: 60,mainID:data.mainID }, 'pokemon')
                         // const user_img = jwt.sign({ expiresInMinutes: 60,user_img:data.photo }, 'pokemon')
                   
-                        // localStorage.setItem("user_id",user_id)
+                        localStorage.setItem("id","ajfhjhfsdhfsdhfsvgh")
                         // localStorage.setItem("user_flag",user_flag)
                         // localStorage.setItem("user_name",user_name)
                         // localStorage.setItem("user_unicode",user_unicode)
@@ -105,7 +105,7 @@ class Login extends React.Component{
 
                             <form onSubmit={this.loginAdmin}>
                                 <div class="input-group mb-3">
-                                    <input type="email" class="form-control" placeholder="Email" name="email"  onChange={this.changedata} value={this.state.formdata.email} required/>
+                                    <input type="email" class="form-control" placeholder="Username" name="username"  onChange={this.changedata} value={this.state.formdata.username} required/>
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-envelope"></span>

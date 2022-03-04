@@ -26,66 +26,105 @@ class Sidebar extends React.Component{
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             
                             <li class="nav-item has-treeview ">
-                                <a href="banner" class="nav-link ">
+                                <Link to="/admin/banner"><a href="#!" class="nav-link ">
                                     <i class="nav-icon fas fa-copy"></i>
                                     <p>Banner</p>
                                 </a>
+                                </Link>
                             </li>
                             
                             <li class="nav-item has-treeview ">
-                                <a href="ameneties" class="nav-link ">
+                            <Link to="/admin/ameneties"><a href="#!" class="nav-link ">
                                     <i class="nav-icon fas fa-copy"></i>
                                     <p>Amenities</p>
                                 </a>
+                                </Link>
                             </li>
 
                             <li class="nav-item has-treeview ">
-                                <a href="city" class="nav-link ">
+                            <Link to="/admin/city"><a href="#!" class="nav-link ">
                                     <i class="nav-icon fas fa-copy"></i>
                                     <p>City</p>
                                 </a>
+                                </Link>
                             </li>
 
                             <li class="nav-item has-treeview ">
-                                <a href="add_properties" class="nav-link ">
+                            <Link to="/admin/properties"><a href="#!" class="nav-link ">
                                     <i class="nav-icon fas fa-copy"></i>
-                                    <p>Add Property</p>
-                                </a>
+                                    <p>Property</p>
+                                </a></Link>
+                            </li>
+
+                            <li class="nav-item has-treeview ">
+                            <Link to="/admin/category"><a href="#!" class="nav-link ">
+                                    <i class="nav-icon fas fa-copy"></i>
+                                    <p>Category</p>
+                                </a></Link>
                             </li>
 
                             <li class="nav-item has-treeview">
-                                <a href="testimonials" class="nav-link ">
+                            <Link to="/admin/testimonials"><a href="#!" class="nav-link ">
                                     <i class="nav-icon fas fa-copy"></i>
                                     <p>Testimonials</p>
-                                </a>
+                                </a></Link>
                             </li>
 
                             <li class="nav-item has-treeview">
-                                <a href="whychoose" class="nav-link ">
+                            <Link to="/admin/whychoose"><a href="#!" class="nav-link ">
                                     <i class="nav-icon fas fa-copy"></i>
                                     <p>Why Choose Us</p>
-                                </a>
+                                </a></Link>
                             </li>
 
                             <li class="nav-item has-treeview">
-                                <a href="aboutus" class="nav-link ">
+                            <Link to="/admin/aboutus"><a href="#!" class="nav-link ">
                                     <i class="nav-icon fas fa-copy"></i>
                                     <p>About Us</p>
-                                </a>
+                                </a></Link>
                             </li>
 
                             <li class="nav-item has-treeview">
-                                <a href="feedback" class="nav-link">
+                            <Link to="/admin/feedback"><a href="#!" class="nav-link">
                                     <i class="nav-icon fas fa-copy"></i>
-                                    <p>Feedbacks</p>
-                                </a>
+                                    <p>Contact Feedbacks</p>
+                                </a></Link>
                             </li>
 
                             <li class="nav-item has-treeview">
-                                <a href="websetting" class="nav-link ">
+                                <Link to="/admin/property_appointment"><a href="#!" class="nav-link">
+                                    <i class="nav-icon fas fa-copy"></i>
+                                    <p>Property Appointment</p>
+                                </a></Link>
+                            </li>
+
+                            <li class="nav-item has-treeview">
+                                <Link to="/admin/google_fb_rating"><a href="#!" class="nav-link ">
+                                    <i class="nav-icon fas fa-copy"></i>
+                                    <p>Google/Facebook Rating</p>
+                                </a></Link>
+                            </li>
+                            
+                            <li class="nav-item has-treeview">
+                                <Link to="/admin/websetting"><a href="#!" class="nav-link ">
                                     <i class="nav-icon fas fa-copy"></i>
                                     <p>Website Settings</p>
-                                </a>
+                                </a></Link>
+                            </li>
+
+
+                            <li class="nav-item has-treeview">
+                                <Link to="/admin/adminsetting"><a href="#!" class="nav-link ">
+                                    <i class="nav-icon fas fa-copy"></i>
+                                    <p>Admin Settings</p>
+                                </a></Link>
+                            </li>
+
+                            <li class="nav-item has-treeview">
+                                <Link to="/admin/change_password"><a href="#!" class="nav-link ">
+                                    <i class="nav-icon fas fa-copy"></i>
+                                    <p>Change Password</p>
+                                </a></Link>
                             </li>
 
                         </ul>

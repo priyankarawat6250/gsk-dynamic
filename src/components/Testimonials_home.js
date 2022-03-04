@@ -12,10 +12,11 @@ class Testimonials_home extends React.Component{
 
     componentDidMount(){
         this.getTestimonials();  
+        this.getSettings();  
     }
 
     getTestimonials = () => {
-        axios.get(`${config.backend_URL}/admin/getTestimonials`)      
+        axios.post(`${config.backend_URL}/admin/getTestimonials`)      
           .then(async (responseJson) => {          
                
               // return
@@ -24,6 +25,39 @@ class Testimonials_home extends React.Component{
           .catch((error) => {
               console.error(error);
           });        
+    }
+
+    getSettings = () => {
+
+      axios.get(`${config.backend_URL}/admin/getSettings`) 
+        .then((responseJson) => {
+            
+          this.setState({
+            google_rating: responseJson.data.data.google_rating,
+            facebook_rating: responseJson.data.data.facebook_rating,
+            google_page_link: responseJson.data.data.google_page_link,
+            facebook_page_link: responseJson.data.data.facebook_page_link,
+            google_text: responseJson.data.data.google_text,
+            facebook_text:responseJson.data.data.facebook_text
+          })
+        })
+        .catch((error) => {
+            console.error(error);
+        });        
+    }
+
+    getRatingsStar  = (stars,flag) => {
+
+        let html = [];
+        for (var i = 0; i < stars; i++) {
+          if(flag=='fb'){
+             html.push( <i><img src="images/rateIconBlue.png" /></i> )
+          }else{
+            html.push( <i><img src="images/rateIconOrange.png" /></i> )
+          }
+        }
+
+        return html;
     }
 
     render(){
@@ -47,27 +81,37 @@ class Testimonials_home extends React.Component{
               <div className="col-sm-auto">
                 <div className="reviewRatingDiv">
                   <div className="reviewRatingRow">
+
+                  <a href={this.state.google_page_link}>
                     <div className="rvwRatingCol">
                       <div className="rvwRatingIcon">
                         <img src="images/googleIcon.png" />
                       </div>
+
+
+                      
                       <div className="rvwRatingDes">
+                        
                         <div className="rvwRatingTtl">Google Rating</div>
                         <div className="rvwRatingScore">
-                          <span>4.8</span>
+                          <span> {this.state.google_rating} </span>
                           <div class="rvwRatingStars">
-                            <i><img src="images/rateIconOrange.png" /></i>
-                            <i><img src="images/rateIconOrange.png" /></i>
-                            <i><img src="images/rateIconOrange.png" /></i>
-                            <i><img src="images/rateIconOrange.png" /></i>
-                            <i><img src="images/rateIconOrange.png" /></i>
+
+                          {this.getRatingsStar(this.state.google_rating,'google')}
+
                           </div>
                         </div>
+
+
                         <div className="rvwRatingNote">
-                          <p>Based on 10+ reviews</p>
+                          <p> {this.state.google_text}  </p>
                         </div>
                       </div>
                     </div>
+                    </a>
+
+
+                    <a href={this.state.facebook_page_link}>
                     <div className="rvwRatingCol">
                       <div className="rvwRatingIcon">
                         <img src="images/facebookIcon.png" />
@@ -75,47 +119,51 @@ class Testimonials_home extends React.Component{
                       <div className="rvwRatingDes">
                         <div className="rvwRatingTtl">Facebook Rating</div>
                         <div className="rvwRatingScore">
-                          <span>4.8</span>
+                          <span>{this.state.facebook_rating}</span>
                           <div className="rvwRatingStars">
-                            <i><img src="images/rateIconBlue.png" /></i>
-                            <i><img src="images/rateIconBlue.png" /></i>
-                            <i><img src="images/rateIconBlue.png" /></i>
-                            <i><img src="images/rateIconBlue.png" /></i>
-                            <i><img src="images/rateIconBlue.png" /></i>
+                             
+                            {this.getRatingsStar(this.state.facebook_rating,'fb')}
+
                           </div>
                         </div>
                         <div className="rvwRatingNote">
-                          <p>Based on 50+ reviews</p>
+                          <p> {this.state.facebook_text}  </p>
                         </div>
                       </div>
                     </div>
+                    </a>
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          
           <div className="reviewSliderOuter">
             <div className="reviewSlider crslCntrls">
-              <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]} navigation spaceBetween={110} slidesPerView={3} centeredSlides={true} loop={true}>
+              <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]} navigation spaceBetween={110} slidesPerView={3} centeredSlides={false} loop={true}>
                 
               {this.state.data.length > 0  ? this.state.data.map((x,key) => { 
                 let imgPath = config.backend_URL+'/'+x.image;
                 return(
+  
                     <SwiperSlide>
                     <div className="reviewSlide">
                         <div className="reviewContent">
-                        <p>“We really like living at the Silverstone Apts. The Apt is kept clean and very quiet. Could not ask for better management from the time we did our viewing to our stay Vicky Sharma and the team have been great. Quick to solve any issues we had with great care. Will highly recommend the property to others.”</p>
+                            <p>“{x.desc}”</p>
                         </div>
                         <div className="reviewTitle">
-                        <h4>Joanne R</h4>
+                        <h4>{x.name.substring(0,x.name.indexOf(" ")+2)}</h4>
                         </div>
-                        <div className="reviewAuthor">
-                        <span>
-                            <img src="images/user1.png" />
-                        </span>
-                        </div>
+                          <div className="reviewAuthor">
+                          <span>
+                              <img src={imgPath} />
+                          </span>
+                          </div>
                     </div>
                     </SwiperSlide>
+                     
+
                 )}):''
             } 
                 

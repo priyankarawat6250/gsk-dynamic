@@ -5,9 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import $ from 'jquery';
 
-import Header from "./includes/Header.js";
-import Sidebar from "./includes/Sidebar.js";
-import Footer from "./includes/Footer.js";
 import Modal from "react-modal";
 const axios = require("axios");
 
@@ -37,9 +34,8 @@ class AdminWhychoose extends React.Component {
 
 
 
-  openModal = (e) => {
-    e.preventDefault()
-    this.setState({ modalIsOpen: true })
+  openModal = (id = '', title = '', image = '', description="") => {
+    this.setState({ id: id, title: title, image: image, description:description, modalIsOpen: true });
   }
 
   closeModal = async (e) => {
@@ -74,32 +70,26 @@ class AdminWhychoose extends React.Component {
 
   mySubmit = e => {
     e.preventDefault();
-    let error = 0;
-    let arry = "";
+     
     if (this.state.title === "") {
-      arry += 'Title can not be empty* <br/>';
-      error++;
+        toast('Title can not be empty');      
     }
-    if (this.state.description === "") {
-      arry += 'Description can not be empty* <br/>';
-      error++;
-    }
-    
-    console.log(error)
-    if (error > 0) {
-      $('#error').html(arry)
-    } else {
-      $('#error').html('')
 
+    if (this.state.description === "") {
+        toast('Description can not be empty');         
+    }
+     
       let newObj = {
         'image': this.state.imageName,
         'title': this.state.title,
         'description': this.state.description,
       }
 
-      axios.post(`${config.backend_URL}/admin/addWhyChooseUs`, newObj)
+      if(this.state.id == ''){
+        //Insert Data
+        axios.post(`${config.backend_URL}/admin/addWhyChooseUs`, newObj)
         .then(async data => {
-          console.log(data);
+           
 
           if (data.data.status === true) {
 
@@ -117,7 +107,27 @@ class AdminWhychoose extends React.Component {
         .catch(err => {
           console.log("error", err)
         })
-    }
+      }else{
+      
+        newObj['id'] =  this.state.id;
+        //Update Data
+        axios.post(`${config.backend_URL}/admin/updateWhyChooseUs`, newObj)
+            .then(async data => {
+  
+              if (data.data.status === true) {
+  
+                  toast(data.data.message)
+                  await this.setState(this.initialState)
+                  this.getWhyChooseUs();
+  
+              }else{
+                  toast("Something wrong!");
+              }
+            })
+            .catch(err => {
+              console.log("error", err)
+            })
+      }
 
   }
 
@@ -188,11 +198,6 @@ class AdminWhychoose extends React.Component {
     };
     return (
       <>
-        <div class="wrapper">
-
-          <Header />
-          <Sidebar />
-
           <ToastContainer />
           <div class="content-wrapper">
             <section class="content-header">
@@ -238,9 +243,12 @@ class AdminWhychoose extends React.Component {
                                   <td><img src={`${config.backend_URL}/${x.image}`} height={100} /></td>
                                   <td>{x.title}</td>
                                   <td>{x.description}</td>
+
                                   <td>
+                                    <a href="javascript:void(0)" onClick={() => { this.openModal(x._id, x.title, x.image, x.description) }} class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a> &nbsp;&nbsp;
                                     <a class="btn btn-danger btn-sm" href="javascript:void(0)" onClick={() => { this.delWhyChooseUs(x._id) }}><i class="fas fa-trash"></i></a>
                                   </td>
+                                  
                                 </tr>
                               )
                             } ):
@@ -281,11 +289,11 @@ class AdminWhychoose extends React.Component {
               <form onSubmit={this.mySubmit} encType="multipart/form-data" id="testi_form">
                 <div class="row">
                   <div class="col-md-6">
-                    <input type="file" name='image' id='image' defaultValue={this.state.image} class="form-control" accept="image/*" onChange={this.onFileChange} required />
+                    <input type="file" name='image' id='image' class="form-control" accept="image/*" onChange={this.onFileChange}  />
                     <br />
                   </div>
                   <div class="col-md-6">
-                    <input class="form-control" placeholder="Title" onChange={this.changedata} value={this.state.name} name="title" type="text" required />
+                    <input class="form-control" placeholder="Title" onChange={this.changedata} value={this.state.title} name="title" type="text" required />
                     <br />
                   </div>
                   <div class="col-md-12">
@@ -299,12 +307,7 @@ class AdminWhychoose extends React.Component {
                 <button type="submit" class="btn btn-success">Submit</button>
               </form>
             </div>
-
-
           </Modal>
-
-          <Footer />
-        </div>
       </>
     );
   }

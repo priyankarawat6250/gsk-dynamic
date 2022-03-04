@@ -1,29 +1,47 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import config from "../config.js";
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide, } from 'swiper/react';
-
+SwiperCore.use([Autoplay])
 const axios = require("axios");
 class Banner extends React.Component{
     state={
+      banner_title:'',
         data:[],
+        title:""
     }
 
     componentDidMount(){
-        this.getBanners();  
+        this.getBanners(); 
+        this.getSettings(); 
     }
 
     getBanners = () => {
         axios.get(`${config.backend_URL}/admin/getBanners`)      
-          .then(async (responseJson) => {          
+          .then((responseJson) => {          
                
-              // return
-              await this.setState({data: responseJson.data.data})
+              this.setState({data: responseJson.data.data})
+              try{
+                this.setState({title:responseJson.data.data[0].title})
+              }
+              catch(err){}
           })
           .catch((error) => {
               console.error(error);
           });        
+    }
+
+    getSettings = () => {
+
+      axios.get(`${config.backend_URL}/admin/getSettings`)
+        .then((responseJson) => {
+            
+            this.setState( {banner_title : responseJson.data.data.banner_title} );            
+            
+        })
+        .catch((error) => {
+            console.error(error);
+        });        
     }
 
     render(){
@@ -32,12 +50,12 @@ class Banner extends React.Component{
          
         <article className="sliderBlock wrapper">
         <div className="mainSlider-outer mainSlider crslCntrls crslCntrlsWhite">
-          <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]} navigation spaceBetween={0} slidesPerView={1}>
+          <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]} spaceBetween={0} slidesPerView={1} autoplay={{ delay: 3000 }}>
             
           {this.state.data.length > 0  ? this.state.data.map((x,key) => {
             let bnnrImg = config.backend_URL+'/'+x.image;
               return(
-            <SwiperSlide>
+            <SwiperSlide virtualIndex={key}>
               <div className="mainSldrSlide" style={{backgroundImage: `url(${bnnrImg})`}}>
                 <div className="mainSldrOverlay"></div>
               </div>
@@ -52,7 +70,7 @@ class Banner extends React.Component{
             <div className="mainSldrTextDiv">
               <div className="container">
                 <div className="mainSldrText">
-                  <h1>{this.state.data > 0 ? this.state.data[0].title:''}</h1>
+                  <h1>{this.state.banner_title}</h1>
                 </div>
               </div>
             </div>

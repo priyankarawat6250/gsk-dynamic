@@ -1,13 +1,9 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import config from "../../config.js";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import $ from 'jquery';
-
-import Header from "./includes/Header.js";
-import Sidebar from "./includes/Sidebar.js";
-import Footer from "./includes/Footer.js";
+ 
 import Modal from "react-modal";
 const axios = require("axios");
 
@@ -41,9 +37,14 @@ class AdminAboutus extends React.Component {
     errors: []
   };
 
-  openModal = (e) => {
-    e.preventDefault()
-    this.setState({ modalIsOpen: true })
+  openModal = (id = '', title = '', image = '', description='') => {
+    
+    // if(this.state.data.length < 3){
+    //   this.setState({ modalIsOpen: true })
+    // }
+    console.log('ABC',id);
+    this.setState({ id: id, title: title, image: image, description: description, modalIsOpen: true });
+    
   }
 
   closeModal = async (e) => {
@@ -51,7 +52,23 @@ class AdminAboutus extends React.Component {
   }
 
   changedata = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
+      if(e.target.name=='main_title' && e.target.value.length  >60){
+          return;
+      }
+
+      if(e.target.name=='main_heading' && e.target.value.length  >67){
+        return;
+      }
+
+      if(e.target.name=='sub_heading' && e.target.value.length  >35){
+        return;
+      }
+
+      if(e.target.name=='sub_description' && e.target.value.length  >280){
+        return;
+      }
+
+      this.setState({ [e.target.name]: e.target.value })
   }
 
 
@@ -63,7 +80,7 @@ class AdminAboutus extends React.Component {
   getAboutUs = () => {
     axios.get(`${config.backend_URL}/admin/getAboutUs`)
       .then((responseJson) => {
-        console.log("sdsds",responseJson.data.data);
+        
         this.setState(responseJson.data.data)
         // console.log(this.state.data);
       })
@@ -81,10 +98,10 @@ class AdminAboutus extends React.Component {
         sub_heading: this.state.sub_heading,
         sub_description: this.state.sub_description,
       }
-      console.log("newObj",newObj)
+       
       axios.post(`${config.backend_URL}/admin/updateAboutUs`, newObj)
         .then(async data => {
-          console.log("sdsD",data);
+           
           if (data.data.status === true) {
             toast(data.data.message)
             await this.setState(this.initialState)
@@ -102,38 +119,42 @@ class AdminAboutus extends React.Component {
 
   addMultipleData = e => {
     e.preventDefault();
-    let error = 0;
-    let arry = "";
+     
     if (this.state.title === "") {
-      arry += 'Title can not be empty* <br/>';
-      error++;
+      toast('Title can not be empty');
     }
+
     if (this.state.description === "") {
-      arry += 'Description can not be empty* <br/>';
-      error++;
+      toast('Description can not be empty');       
     }
-   
-    console.log(error)
-    if (error > 0) {
-      $('#error').html(arry)
-    } else {
-      $('#error').html('')
+    
+    console.log("Id", this.state.id);
+
+    if(this.state.id == ''){
+      //Insert Data
+
+      const min = 10;
+      const max = 1000;
+      const rand = min + Math.random() * (max - min);
 
       let newData = this.state.data
       newData.push({
-        id:(Math.random() + 1).toString(36).substring(10),
+        id:rand,
         title: this.state.title,
         image: this.state.image,
         description: this.state.description,
         timestamp:Date.now()
       })
+
+       
       axios.post(`${config.backend_URL}/admin/updateAboutUs`, {data:newData})
         .then(async data => {
-          console.log("sdsD-->",data);
+          
+          
           if (data.data.status === true) {
             toast(data.data.message)
             await this.setState({data:newData,image:"",title:"",description:"",modalIsOpen:false})
-            this.getAboutUs();
+            // this.getAboutUs();
           } else {
             toast("Something wrong!");
           }
@@ -141,8 +162,37 @@ class AdminAboutus extends React.Component {
         .catch(err => {
           console.log("error", err)
         })
-    }
+     
+      }else{
+        
+        
+      let newData = this.state.data
+      newData.map(x=>{
+        if(x.id === this.state.id){
+          x.title= this.state.title
+          x.image= this.state.image
+          x.description= this.state.description
+        }
+      })
 
+        
+         //Update Data
+          axios.post(`${config.backend_URL}/admin/updateAboutUs`, {data:newData})
+          .then(async data => {
+            
+            
+            if (data.data.status === true) {
+              toast(data.data.message)
+              await this.setState({data:newData, image:"", title:"",description:"", modalIsOpen:false})
+              // this.getAboutUs();
+            } else {
+              toast("Something wrong!");
+            }
+          })
+          .catch(err => {
+            console.log("error", err)
+          })
+      }
   }
 
   onFileChange = (e) => {
@@ -215,9 +265,6 @@ class AdminAboutus extends React.Component {
     };
     return (
       <>
-        <div class="wrapper">
-          <Header />
-          <Sidebar />
           <ToastContainer />
           <div class="content-wrapper">
             <section class="content-header">
@@ -228,7 +275,7 @@ class AdminAboutus extends React.Component {
                   </div>
                   <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                      <button onClick={this.openModal} class="pull-right btn btn-success">Add About Us</button>
+                      <button  onClick={() => { this.openModal('', '', '', '' ) }} class="pull-right btn btn-success">Add About Us</button>
                     </ol>
                   </div>
                 </div>
@@ -254,7 +301,7 @@ class AdminAboutus extends React.Component {
                       </div>
 
                           <div class="form-group col-md-2" >
-                            <center><img src={`${config.backend_URL}/`+this.state.bkg_image} height='100px' width='110px' /></center><br />
+                            <center><img src={`${config.backend_URL}/`+this.state.bkg_image} height='100px' width='200px' /></center><br />
                             </div>
 
                         <div class="form-group col-md-6">
@@ -292,7 +339,7 @@ class AdminAboutus extends React.Component {
 
                         <div class="form-group col-md-6">
                           <label>Description</label>
-                          <textarea class="form-control" name="sub_description" onChange={this.changedata} required value={this.state.sub_description} ></textarea>
+                          <textarea class="form-control"  rows={6} name="sub_description" onChange={this.changedata} required value={this.state.sub_description} ></textarea>
                         </div>
 
                       </div>
@@ -308,11 +355,21 @@ class AdminAboutus extends React.Component {
                       <div class='row'>
                          
                           
-                         <div class='col-md-2'>
-                        <button onClick={this.openModal} class="pull-right btn btn-warning" style={{'background-color': 'white',
-    'color': '#007bff'}}><b>Add More </b></button>
+                         
+
+                        {this.state.data.length < 3 ? 
+                            <div class='col-md-2'>
+                              <button onClick={() => { this.openModal('', '', '', '' ) }} class="pull-right btn btn-warning" style={{'background-color': 'white','color': '#007bff'}}><b>Add More </b></button>
+                              </div>
+                        :''
+                          
+                            
+                          
+                        }
+
+
                         </div>
-                        </div>
+                        
                       </div>
                       <div class="card-body">
                         <table id="exampl e1" class="table table-bordered table-striped">
@@ -322,7 +379,7 @@ class AdminAboutus extends React.Component {
                               <th>Image</th>
                               <th>Title</th>
                               <th>Description</th>
-                              <th width="8%">Action</th>
+                              <th width="5%">Action</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -335,8 +392,11 @@ class AdminAboutus extends React.Component {
                                   <td>{x.title}</td>
                                   <td>{x.description}</td>
                                   <td>
-                                    <a class="btn btn-danger btn-sm" href="javascript:void(0)" onClick={() => { this.delAboutUs(x.id) }}><i class="fas fa-trash"></i></a>
+
+                                  <a href="javascript:void(0)" onClick={() => { this.openModal( x.id, x.title, x.image, x.description ) }} class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a> &nbsp;&nbsp;
+                                    {/* <a class="btn btn-danger btn-sm" href="javascript:void(0)" onClick={() => { this.delAboutUs(x.id) }}><i class="fas fa-trash"></i></a> */}
                                   </td>
+
                                 </tr>
                               )
                             })}
@@ -361,7 +421,7 @@ class AdminAboutus extends React.Component {
           >
             {/* modal */}
             <div class="modal-header">
-              <h2>Add About Us</h2>
+              <h2>About Us</h2>
               <button type="button" class="btn-close" onClick={this.closeModal}>x</button>
             </div>
             <div class="modal-body">
@@ -370,7 +430,7 @@ class AdminAboutus extends React.Component {
               <form onSubmit={this.addMultipleData} encType="multipart/form-data" id="testi_form">
                 <div class="row">
                   <div class="col-md-6">
-                    <input type="file" name='image' id='image' defaultValue={this.state.image} class="form-control" accept="image/*" onChange={this.onFileChange} required />
+                    <input type="file" name='image' id='image'  class="form-control" accept="image/*" onChange={this.onFileChange} />
                     <br />
                   </div>
                   <div class="col-md-6">
@@ -391,9 +451,6 @@ class AdminAboutus extends React.Component {
 
 
           </Modal>
-
-          <Footer />
-        </div>
       </>
     );
   }

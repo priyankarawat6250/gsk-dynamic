@@ -1,13 +1,9 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import config from "../../config.js";
 import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import $ from 'jquery';
-
-import Header from "./includes/Header.js";
-import Sidebar from "./includes/Sidebar.js";
-import Footer from "./includes/Footer.js";
+ 
 import Modal from "react-modal"; 
 const axios = require("axios");
 
@@ -35,13 +31,13 @@ class City extends React.Component{
   
   
 
-openModal = (e)=>{
-e.preventDefault()
-this.setState({modalIsOpen:true})
+openModal = (id='', city='')=>{
+  let newString = city.replace(/[^A-Z0-9]/ig, "-");
+  this.setState({ id: id, city: city, slug:newString.toLowerCase(), modalIsOpen: true });
 }
 
 closeModal=async (e)=> {
-this.setState({modalIsOpen:false})
+  this.setState({modalIsOpen:false})
 }
 
 changedata=(e)=>{
@@ -59,43 +55,35 @@ componentDidMount=()=>{
 
 getCities =   () => {
   
-axios.get(`${config.backend_URL}/admin/getCities`)         
-  .then((responseJson) => {
-      
-      console.log(responseJson.data.data);
-      // return
-      this.setState({data: responseJson.data.data})
-      console.log(this.state.data);
-       
-  })
-  .catch((error) => {
-      console.error(error);
-  });        
+  axios.get(`${config.backend_URL}/admin/getCities`)         
+    .then((responseJson) => {
+        
+        console.log(responseJson.data.data);
+        // return
+        this.setState({data: responseJson.data.data})
+        console.log(this.state.data);
+        
+    })
+    .catch((error) => {
+        console.error(error);
+    });        
 }
 
-mySubmit = e => {
-  e.preventDefault();
-  let error = 0;
-  let arry = "";
-  if (this.state.title === "") {
-    
-    arry += 'Name can not be empty* <br/>';
-    error++;
-  }  
-  console.log(error)
+  mySubmit = e => {
+      e.preventDefault();
+  
+      if(this.state.city === "") {
+          toast('City can not be empty');
+      }  
+  
 
-  //this.setState({ errors: arry }) 
-  if (error > 0) {
-      $('#error').html(arry)
-    } else {
-      $('#error').html('')
-        
-        let newObj = {
-          'city':this.state.city,
-          'slug':this.state.slug
-        }
-        
-
+      let newObj = {
+        'city':this.state.city,
+        'slug':this.state.slug
+      }
+      
+      if(this.state.id == ''){
+        //Insert Data
         axios.post(`${config.backend_URL}/admin/addCity`, newObj)                
           .then(async data=>{   
             console.log(data);
@@ -116,7 +104,27 @@ mySubmit = e => {
           .catch(err=>{
             console.log("error",err)
           })        
-   }      
+      }else{
+      
+          newObj['id'] =  this.state.id;
+          //Update Data
+          axios.post(`${config.backend_URL}/admin/updateCity`, newObj)
+              .then(async data => {
+    
+                if (data.data.status === true) {
+    
+                    toast(data.data.message)
+                    await this.setState(this.initialState)
+                    this.getCities();
+    
+                }else{
+                    toast("Something wrong!");
+                }
+              })
+              .catch(err => {
+                console.log("error", err)
+              })
+      }
 
 }
  
@@ -168,11 +176,6 @@ const customStyles = {
 };
         return (
             <>
-            <div class="wrapper">
-
-            <Header />            
-            <Sidebar />             
-             
              <ToastContainer />
             <div class="content-wrapper">
                     <section class="content-header">
@@ -217,6 +220,7 @@ const customStyles = {
                                                       <td>{x.city}</td>
                                                        
                                                       <td>
+                                                      <a href="javascript:void(0)" onClick={() => { this.openModal( x._id, x.city ) }} class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a> &nbsp;&nbsp;
                                                           <a class="btn btn-danger btn-sm" href="javascript:void(0)" onClick={() => { this.delCity(x._id) }}><i class="fas fa-trash"></i></a>
                                                       </td>
                                                   </tr>
@@ -224,6 +228,7 @@ const customStyles = {
                                             } ):
                                                  
                                                   <tr>
+                                                    
                                                       <td colSpan={3} style={{color:'red'}}><center> Result Not Found </center></td> 
                                                   </tr>
                                                                                          
@@ -250,7 +255,7 @@ const customStyles = {
                     >
                         {/* modal */}
                         <div class="modal-header">
-                            <h2>Add City</h2>
+                            <h2>City</h2>
                             <button type="button" class="btn-close" onClick={this.closeModal}>x</button> 
                         </div>
                         <div class="modal-body">
@@ -260,7 +265,7 @@ const customStyles = {
                               <div class="row">
                                 
                                   <div class="col-md-12">
-                                  <input class="form-control" placeholder="City" onChange={this.changedata} value={this.state.name} name="city" type="text" required/>
+                                  <input class="form-control" placeholder="City" onChange={this.changedata} value={this.state.city} name="city" type="text" required/>
                                   <br/>
                                   </div>
                               </div>
@@ -271,9 +276,6 @@ const customStyles = {
                          
 
                     </Modal>
-
-            <Footer />
-            </div> 
             </>
         );
     }

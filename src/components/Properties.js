@@ -1,15 +1,101 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Tabs, Tab } from "react-bootstrap";
+import config from "../config.js";
 
-import Header from "./Header.js";
-import Footer from "./Footer.js";
- 
+const axios = require("axios");
+
 class Properties extends React.Component{
+
+    state={
+        Properties:[], 
+        cities:[],
+        cityId:'all',
+        update:0
+    }
+
+    componentDidMount=  ()=>{
+
+        const queryParams = new URLSearchParams(window.location.search);
+        const slug = queryParams.get('slug');        
+
+        if(slug!=null){
+            this.getSingleCity(slug);           
+        }else{
+            this.getProperties();  
+        }
+
+        this.getCities(); 
+    }
+
+    componentDidUpdate(prevProps) {
+        console.log("prev",prevProps)
+        console.log("param",this.props.match.params)
+
+        if (this.props.match.params.id !== prevProps.match.params.id) {
+            console.log("inside")
+          this.setState({update:""})
+        }
+      }
+
+    getSingleCity =   (slug) => {
+        let newObj = {slug:slug};
+         
+        axios.post(`${config.backend_URL}/admin/getSingleCity`,newObj)         
+        .then((responseJson) => {
+
+            this.setState({ cityId: responseJson.data.data._id})
+
+            this.getProperties(responseJson.data.data._id);  
+           
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
+
+    getProperties =   (key) => {
+        
+        let newObj = {};
+        if(key!='all'){
+            newObj = { cityId: key} 
+        }
+
+        axios.post(`${config.backend_URL}/admin/getProperties`,newObj)         
+        .then((responseJson) => {
+        
+            
+          this.setState({Properties: responseJson.data.data, cityId: key, update:0})
+           
+           
+        })
+        .catch((error) => {
+          console.error(error);
+        });        
+    }
+
+    getCities = () => {
+  
+        axios.get(`${config.backend_URL}/admin/getCities`)         
+          .then((responseJson) => {              
+               
+            this.setState({cities: responseJson.data.data});
+
+               console.log(responseJson.data.data);
+
+          })
+        .catch((error) => {
+            console.error(error);
+        });        
+    }
+
+ 
+
     render(){
         return (
         <>
-        <Header />
+         
 
     <section>
       <article className="pageHdrBlock wrapper py-80" style={{backgroundImage: `url("images/subpageBg.jpg")`}}>
@@ -32,294 +118,97 @@ class Properties extends React.Component{
             </div>
         </div>
       </article>
+
       <article className="propertyCatBlock wrapper pt-80">
         <div className="container">
             <div className="propertyTabsRow">
-                <div className="propertyTabsOuter">
-                    <Tabs defaultActiveKey="all" id="uncontrolled-tab-example" className="propertyTabs">
-                        <Tab eventKey="all" title="All">
+                <div className="propertyTabsOuter"> 
+
+                    <Tabs id="uncontrolled-tab-example" activeKey={this.state.cityId} className="propertyTabs" onSelect={this.getProperties}>
+ 
+                        <Tab eventKey="all" title="All" >
                             <div className="propertyCatItems">
                                 <div className="row filterMain g-5">
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/oakTower.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Oak Tower</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 11635 102 Avenue, Edmonton, Alberta, T5K0R4</p>
-                                                </div>
-                                            </a>
+                                
+                                {this.state.Properties.length > 0  ? this.state.Properties.map((x,key) => {
+                                    let imagePath = `${config.backend_URL}/${x.property_image}`;
+                                    imagePath = (x.property_image=='')?`${config.backend_URL}/default.jpg`:imagePath
+                                    return(
+
+                                        <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
+                                            <div className="prprtyItem">
+
+                                                <Link to={`/${x.slug}`}>
+                                                <a href="#!">
+                                                    <div className="prprtyBadge">For Rent</div>
+                                                    <div className="prprtyImg" style={{backgroundImage: `url(${imagePath})`}}>
+                                                        <div className="prprtyOverlay"></div>
+                                                    </div>
+                                                    <div className="prprtyInfo">
+                                                        <h4>{x.property_name}</h4>
+                                                        <p><i><img src="images/locIcon.png" /></i>{x.address}</p>
+                                                    </div>
+                                                </a>
+                                                </Link>
+
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/chappelleGardenVillas.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Chappelle Garden Villas</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 1210 Chappelle BLVD, Edmonton, T6W3L5</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/silverstoneTerrace.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Silverstone Terrace</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 2910 141 Street SW, Edmonton, T6W 3M2</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/chappelleGarden.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Chappelle Garden</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 1071 Chappelle Blvd SW, Edmonton, T6W3M1</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/novaVilla.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Nova Villa</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 12615 152 Ave NW, Edmonton, T5X6E9</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/oxfordCampus.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Oxford Campus</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 16504 130 Street NW, Edmonton, T6V0E9</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/prescottPlace.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Prescott Place</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 320 Pioneer Road, Spruce Grove T7X0Y2</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/spruceHeight.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Spruce Height</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 111 Mclaughlin DR, Spruce Grove T7X0T</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/riversideVillas.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Riverside Villas</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 5 Redspur Drive, St. Albert, Alberta T8N7Y6</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    )
+                                }):<> <center><h3>Coming Soon...</h3></center> </>
+                                }
+    
                                 </div>
                             </div>
                         </Tab>
-                        <Tab eventKey="edmonton" title="Edmonton">
-                            <div className="propertyCatItems">
-                                <div className="row filterMain g-5">
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/oakTower.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
+
+                    {this.state.cities.length > 0  ? this.state.cities.map((x,key) => {
+                        return(
+                            x.propertyCount > 0 ?
+                            <Tab eventKey={x._id} title={x.city} >
+                                <div className="propertyCatItems">
+                                    <div className="row filterMain g-5">
+                                        
+                                    {this.state.Properties.length > 0  ? this.state.Properties.map((x,key) => {
+                                        let imagePath = `${config.backend_URL}/${x.property_image}`;
+                                        imagePath = (x.property_image=='')?`${config.backend_URL}/default.jpg`:imagePath
+                                        return(
+
+                                            <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
+                                                <div className="prprtyItem">
+
+                                                <Link to={`/${x.slug}`}>
+                                                    <a href="#!">
+                                                        <div className="prprtyBadge">For Rent</div>
+                                                        <div className="prprtyImg" style={{backgroundImage: `url(${imagePath})`}}>
+                                                            <div className="prprtyOverlay"></div>
+                                                        </div>
+                                                        <div className="prprtyInfo">
+                                                            <h4>{x.property_name}</h4>
+                                                            <p><i><img src="images/locIcon.png" /></i>{x.address}</p>
+                                                        </div>
+                                                    </a>
+                                                    </Link>
+
                                                 </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Oak Tower</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 11635 102 Avenue, Edmonton, Alberta, T5K0R4</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/chappelleGardenVillas.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Chappelle Garden Villas</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 1210 Chappelle BLVD, Edmonton, T6W3L5</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/silverstoneTerrace.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Silverstone Terrace</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 2910 141 Street SW, Edmonton, T6W 3M2</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/chappelleGarden.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Chappelle Garden</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 1071 Chappelle Blvd SW, Edmonton, T6W3M1</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/novaVilla.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Nova Villa</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 12615 152 Ave NW, Edmonton, T5X6E9</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/oxfordCampus.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Oxford Campus</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 16504 130 Street NW, Edmonton, T6V0E9</p>
-                                                </div>
-                                            </a>
-                                        </div>
+                                            </div>
+                                        )
+                                    }): <> <center><h3>Coming Soon...</h3></center> </>
+                                    }
+
                                     </div>
                                 </div>
-                            </div>
-                        </Tab>
-                        <Tab eventKey="spruce-grove" title="Spruce Grove">
-                            <div className="propertyCatItems">
-                                <div className="row filterMain g-5">
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/prescottPlace.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Prescott Place</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 320 Pioneer Road, Spruce Grove T7X0Y2</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/spruceHeight.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Spruce Height</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 111 Mclaughlin DR, Spruce Grove T7X0T</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>  
-                                </div>
-                            </div>
-                        </Tab>
-                        <Tab eventKey="st-alberta" title="St Alberta">
-                            <div className="propertyCatItems">
-                                <div className="row filterMain g-5">
-                                    <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                                        <div className="prprtyItem">
-                                            <a href="/property-detail">
-                                                <div className="prprtyBadge">For Rent</div>
-                                                <div className="prprtyImg" style={{backgroundImage: `url("images/riversideVillas.jpg")`}}>
-                                                    <div className="prprtyOverlay"></div>
-                                                </div>
-                                                <div className="prprtyInfo">
-                                                    <h4>Riverside Villas</h4>
-                                                    <p><i><img src="images/locIcon.png" /></i> 5 Redspur Drive, St. Albert, Alberta T8N7Y6</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Tab>
+                            </Tab> :''
+                        )
+                        }):<></>
+                    }
+
                     </Tabs>
                 </div>				    
             </div>
         </div>
       </article>
     </section>
-    <Footer />
+     
     </>
   )
 } 

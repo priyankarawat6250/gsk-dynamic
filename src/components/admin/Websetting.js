@@ -4,14 +4,9 @@ import config from "../../config.js";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import $ from 'jquery';
-
-import { confirmAlert } from 'react-confirm-alert'; // Import
+ 
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
-
-
-import Header from "./includes/Header.js";
-import Sidebar from "./includes/Sidebar.js";
-import Footer from "./includes/Footer.js";
+ 
 const axios = require("axios");
 class Websetting extends React.Component {
 
@@ -60,7 +55,7 @@ class Websetting extends React.Component {
     getSettingsData = () => {
       axios.get(`${config.backend_URL}/admin/getSettings`)
         .then((responseJson) => {
-          console.log("sdsds",responseJson.data.data);
+           
           this.setState({
             logo: responseJson.data.data.logo,
             name: responseJson.data.data.name,
@@ -69,7 +64,7 @@ class Websetting extends React.Component {
             facebook_link: responseJson.data.data.facebook_link,
             address:responseJson.data.data.address
           })
-          // console.log(this.state.data);
+           
         })
         .catch((error) => {
           console.error(error);
@@ -132,9 +127,6 @@ class Websetting extends React.Component {
 
     return (
       <>
-        <div class="wrapper">
-          <Header />
-          <Sidebar />
           <ToastContainer />
 
           <div class="content-wrapper">
@@ -219,10 +211,6 @@ class Websetting extends React.Component {
               </div>
             </section>
           </div>
-
-
-          <Footer />
-        </div>
       </>
     );
   }

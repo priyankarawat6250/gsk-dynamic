@@ -3,13 +3,14 @@ import { Link, withRouter } from "react-router-dom";
 import config from "../../config.js";
 import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import $ from 'jquery'; 
-
+import $ from 'jquery';
+  
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+
  
 const axios = require("axios");
 
-class Feedback extends React.Component{
+class Property_Appointment extends React.Component{
 
     state={   
         status:'', 
@@ -19,8 +20,8 @@ class Feedback extends React.Component{
 
     initialState = {
         status:'',
-        data:[],
-        errors: []
+      data:[],
+      errors: []
         
     }
 
@@ -28,9 +29,9 @@ class Feedback extends React.Component{
         this.getFeedbacks();  
     }
 
-    getFeedbacks = async () => {
+getFeedbacks = async () => {
       
-    await axios.get(`${config.backend_URL}/admin/getContactFeedbacks`)         
+    await axios.get(`${config.backend_URL}/admin/getPropertyFeedbacks`)         
     .then((responseJson) => {
         
         console.log(responseJson.data.data);
@@ -46,15 +47,15 @@ class Feedback extends React.Component{
     
     changedata = (e) => {
 
-        const id = e.target.getAttribute('data-id')  
-            axios.post(`${config.backend_URL}/admin/updateFeedbacks`,{id:id, status:e.target.value})         
-            .then((responseJson) => {
-                    console.log('iiiiiiiiiiii',responseJson);
-                
-            })
-            .catch((error) => {
-                console.error(error);
-            });     
+    const id = e.target.getAttribute('data-id')  
+        axios.post(`${config.backend_URL}/admin/updateFeedbacks`,{id:id, status:e.target.value})         
+        .then((responseJson) => {
+                console.log('iiiiiiiiiiii',responseJson);
+            
+        })
+        .catch((error) => {
+            console.error(error);
+        });     
     }
   
 
@@ -66,7 +67,7 @@ class Feedback extends React.Component{
                         <div class="container-fluid">
                             <div class="row mb-2">
                                 <div class="col-sm-6">
-                                <h1>Contact Feedbacks </h1>
+                                <h1>Property Feedback </h1>
                                 </div>
                                 <div class="col-sm-6">
                                 
@@ -81,7 +82,7 @@ class Feedback extends React.Component{
                                 <div class="col-md-12">
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Contact Feedbacks List</h3>
+                                        <h3 class="card-title">Property Feedback List</h3>
                                     </div>
                                     <div class="card-body">
                                         <table id="exampl e1" class="table table-bordered table-striped">
@@ -92,6 +93,8 @@ class Feedback extends React.Component{
                                                 <th>Mobile</th>
                                                 <th>Email</th>
                                                 <th>Subject</th>
+                                                <th>Property</th>
+                                                <th>Bedroom</th>
                                                 <th>Message</th>
                                                 <th>Date</th>
                                                 <th>Status</th>
@@ -109,11 +112,13 @@ class Feedback extends React.Component{
                                                         <td>{x.number}</td>
                                                         <td>{x.email}</td>
                                                         <td>{x.subject}</td>
+                                                        <td>{x.property_name}</td>
+                                                        <td>{x.bedroom}</td>
                                                         <td>{x.message}</td>
                                                         <td>{new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(x.timestamp)}</td>
                                                         <td>
 
-                                                            <select class="form-control" value={x.status} name="status" onChange={this.changedata} data-id={x._id}>
+                                                            <select class="form-control" value={x.status} name="status" onChange={this.changedata}  data-id={x._id}>
 
                                                                 <option value="">Choose Priority</option>
                                                                 <option value="pending">Pending</option>
@@ -147,4 +152,4 @@ class Feedback extends React.Component{
         );
     }
 }
-export default withRouter(Feedback);
+export default withRouter(Property_Appointment);
